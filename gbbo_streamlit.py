@@ -50,7 +50,7 @@ def main():
     bakers_pd = pd.read_sql(session.query(Baker).filter(Baker.site_id > 0).statement,session.bind)
     baker_names = bakers_pd['name'].values.tolist()
 
-    baker_selection = st.sidebar.multiselect(label='Select bakers to analyse', options=baker_names, default=random.choices(baker_names, k=10))
+    baker_selection = st.sidebar.multiselect(label='Select bakers to analyse', options=baker_names, default=random.sample(baker_names, 10))
 
     if len(baker_selection) > 0:
         baker_recipes = pd.read_sql(session.query(
